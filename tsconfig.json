@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "declarationMap": true,
+    "baseUrl": "./src",
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react",
+    "importHelpers": true,
+    "lib": ["es5", "es6", "es7", "es2017", "dom"],
+    "module": "es6",
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "preserveConstEnums": true,
+    "pretty": true,
+    "removeComments": true,
+    "rootDirs": ["./src"],
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "strict": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "target": "es6",
+    "watch": false
+  },
+  "exclude": ["node_modules", "public", ".cache"]
+}

@@ -1,7 +1,6 @@
 {
-  "name": "react-style-prop-editor",
+  "name": "style-editor",
   "version": "0.1.0",
-  "main": "index.js",
   "repository": "git@github.com:Palmaswell/react-style-prop-editor.git",
   "author": "Mauricio Palma <mauricio.palma@woodlikeocean.com>",
   "license": "MIT",
@@ -11,23 +10,38 @@
     "dev": "gatsby develop",
     "build": "gatsby build",
     "test": "jest",
-    "test:coverage": "npm test -- --coverage"
+    "test:coverage": "npm test -- --coverage",
+    "type-check": "tsc --noEmit",
+    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'"
   },
   "dependencies": {
     "@emotion/core": "^10.0.22",
+    "@emotion/styled": "^10.0.23",
     "@mdx-js/react": "^1.5.1",
+    "@theme-ui/presets": "^0.2.44",
+    "@theme-ui/typography": "^0.2.46",
     "gatsby": "^2.18.11",
+    "gatsby-plugin-theme-ui": "^0.2.43",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "theme-query": "^1.4.5",
     "theme-ui": "^0.2.49"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "@types/react": "^16.9.16",
+    "@types/react-dom": "^16.9.4",
+    "@types/theme-ui": "^0.2.6",
     "babel-jest": "^24.9.0",
     "babel-preset-gatsby": "^0.2.26",
-    "eslint": "^6.7.2",
     "eslint-config-react-app": "^5.1.0",
+    "gatsby-plugin-typescript": "^2.1.23",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "ts-jest": "^24.2.0",
+    "tslint": "^5.20.1",
+    "tslint-react": "^4.1.0",
+    "typescript": "^3.7.3"
   }
 }

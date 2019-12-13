@@ -19,13 +19,14 @@ uses an `onClick` event to select a component.
 - You can use an HTML `id` attribute to uniquely identify editable components
 - You will need to use React Context and an updater to handle selecting elements and applying styles
 - You'll need to use React.createElement in your pragma to tie into your editor context using the render prop pattern
-    ```js
-      return React.createElement(SomeContext.Consumer, {}, val => {
-        return React.createElement(pre, {}, JSON.stringify(val, null, 2))
-      })
-    ```
 
-## Nice to haves
+```js
+  return React.createElement(SomeContext.Consumer, {}, val => {
+    return React.createElement(pre, {}, JSON.stringify(val, null, 2))
+  })
+```
+
+## Nice to haves  
 
 - Tie the style editor into Theme UI's custom JSX pragma
 - Expose values like color based on a global theme
