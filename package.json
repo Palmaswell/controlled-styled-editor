@@ -1,7 +1,7 @@
 {
-  "name": "controlled-style-editor",
+  "name": "controlled-styled-editor",
   "version": "0.1.0",
-  "repository": "git@github.com:Palmaswell/react-style-prop-editor.git",
+  "repository": "git@github.com:Palmaswell/controlled-styled-editor.git",
   "author": "Mauricio Palma <mauricio.palma@woodlikeocean.com>",
   "license": "MIT",
   "private": false,
