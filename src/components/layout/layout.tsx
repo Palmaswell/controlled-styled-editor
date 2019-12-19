@@ -12,8 +12,9 @@ const stylesContent: SxStyleProp = {
   flexGrow: 10,
   flexBasis: 0,
   minWidth: 320,
-  p: `${qt('spaces')(4)}px`,
-  backgroundColor: `${qt('whites')(1)}`
+  boxSizing: 'border-box',
+  padding: `${qt('spaces')(4)}px ${qt('spaces')(2)}px`,
+  backgroundColor: `${qt('whites')(1)}`,
 };
 
 const stylesSideBar: SxStyleProp = {
@@ -22,7 +23,7 @@ const stylesSideBar: SxStyleProp = {
   minHeight: `calc(100vh - ${qt('spaces')(7)}px)`,
   p: `${qt('spaces')(4)}px`,
   borderLeft: `1px solid ${qt('grays')(3)}`,
-  backgroundColor: `${qt('whites')(0)}`
+  backgroundColor: `${qt('whites')(0)}`,
 };
 
 export const Main: React.FC = (props): JSX.Element => (
@@ -32,7 +33,6 @@ export const Main: React.FC = (props): JSX.Element => (
 export const Content: React.FC = (props): JSX.Element => (
   <section sx={stylesContent}>{props.children}</section>
 );
-
 
 export const SideBar: React.FC = (props): JSX.Element => (
   <aside sx={stylesSideBar}>{props.children}</aside>

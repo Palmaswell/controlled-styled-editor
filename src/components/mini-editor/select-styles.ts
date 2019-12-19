@@ -7,20 +7,20 @@ export const stylesSelect: StylesConfig = {
     padding: 20,
     borderBottom: `1px solid ${qt('grays')(3)}`,
     color: `${qt('blacks')(1)}`,
-    background: state.isSelected ? `${qt('yellows')(0)}` : `${qt('whites')(0)}`,
+    background: state.isSelected ? `${qt('blues')(0)}` : `${qt('whites')(0)}`,
     fontFamily: `${qt('body')}`,
     ':hover': {
       backgroundColor: state.isSelected
-        ? `${qt('yellows')(0)}`
+        ? `${qt('blues')(0)}`
         : `${qt('whites')(1)}`,
     },
   }),
   control: (provided, state) => ({
     ...provided,
-    borderColor: state.isFocused ? `${qt('yellows')(1)}` : `${qt('grays')(2)}`,
-    boxShadow: state.isFocused ? `0 0 0 1px ${qt('yellows')(1)}` : '',
+    borderColor: state.isFocused ? `${qt('blues')(0)}` : `${qt('grays')(2)}`,
+    boxShadow: state.isFocused ? `0 0 0 1px $${qt('blues')(0)}` : '',
     ':hover': {
-      borderColor: `${qt('yellows')(1)}`,
+      borderColor: `${qt('blues')(2)}`,
     },
   }),
   singleValue: (provided, state) => ({

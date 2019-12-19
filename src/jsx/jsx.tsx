@@ -2,8 +2,7 @@ import React from 'react';
 import { jsx as themeUI } from 'theme-ui';
 
 import { ControlledStyles } from '.';
-import { StylesEditorContext, StyleContextProps } from '../context';
-
+import { StylesEditorContext, StyleContextProps, qt } from '../context';
 
 export function jsx(
   type: React.ElementType,
@@ -22,6 +21,7 @@ export function jsx(
         setEditorProps,
         setIsOpen,
       } = value;
+      const currentElement = props.id === currentId;
 
       const onClick = (e: React.MouseEvent<HTMLElement>): void => {
         e.stopPropagation();
@@ -32,15 +32,28 @@ export function jsx(
         }
       };
 
-      return themeUI(type, {
-        ...props,
-        sx: {
-          ...props.sx,
-          ...(props.id && props.id === currentId && editorProps),
-          ...(props.id && styleMap.has(props.id) && styleMap.get(props.id)),
+      return themeUI(
+        type,
+        {
+          ...props,
+          sx: {
+            ...props.sx,
+            ...(props.id && currentElement && editorProps),
+            ...(props.id && styleMap.has(props.id) && styleMap.get(props.id)),
+            ...(currentElement && {
+              outline: `2px solid ${qt('blues')(0)}`,
+            }),
+            ...{
+              ':hover': {
+                outline: `2px solid ${qt('blues')(0)}`,
+                cursor: 'pointer'
+              },
+            }
+          },
+          onClick,
         },
-        onClick,
-      }, ...children);
+        ...children
+      );
     }
   );
 }
