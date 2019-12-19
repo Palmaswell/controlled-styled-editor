@@ -1,0 +1,10 @@
+node_modules
+build
+dist
+.docz
+.cache
+.DS_Store
+lib
+yarn-error.log
+
+.env
