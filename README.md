@@ -1,7 +1,6 @@
 # Controlled Styled Editor
 
-
-> Edit your React components based on Theme UI constrained design principles. 
+> Edit your React components based on System UI constrained design principles. 
 
 [![CircleCI](https://circleci.com/gh/Palmaswell/controlled-styled-editor.svg?style=svg)](https://circleci.com/gh/Palmaswell/controlled-styled-editor)
 
@@ -25,28 +24,40 @@ yarn dev
 yarn test --watch
 ```
 
+
 ## Motivation
 
-[Theme UI ](https://theme-ui.com/)  allows us to design and write coherent and consistent UIs. It's a reliable approach for consolidating branding compliance across web applications. 
+[Theme UI ](https://theme-ui.com/)  allows us to design and write coherent and consistent UIs. At its core, it uses the System UI theme specification as a reliable approach for consolidating branding compliance across web applications. 
 
-The Controlled Styled Editor is a (very early stage) proof of concept to empower designers to create interactive layouts based on the Theme UIs design system principles applied inside your React components.
+The Controlled Styled Editor is a (very early stage) proof of concept to empower designers to create interactive layouts based on the Theme UI design system principles applied in your React components.
 
 ### How it works
-It uses an extended Theme UI pragma together with React Context API to handle element selection and Theme UI based style injection. Only the defined CSS rule properties from the components are exposed to the editor. 
+Under the hood, it uses a custom JSX Pragma to handle element selection and Theme UI based style injection. It does this by extending the Theme UI JSX Pragma.
 
-At its very core, it uses the Theme UI / System UI specification for editing styles through a theme properties style editor. It uses (Theme Query)[https://github.com/woodlike/wdlk/tree/master/packages/theme-query] under the hood which is a very small library I wrote to easily query theme properties.
+At its very core, it uses the Theme UI / System UI specification for editing styles through a theme properties style editor. Your design adjustments will be compliant with your design system.
 
-On the other hand, visual accessibility compliance checks based on the (WCAG)[https://www.w3.org/WAI/standards-guidelines/wcag/] and theme property control live at the heart of the product vision.
-Currently, we only support color contrast accessibility checks. By picking a component color and background color you will know if a component has A, AA or AAA compliance (color contrast ratio). But this is only the beginning of making accessibility design checks more visual.
+It also uses (Theme Query)[https://github.com/woodlike/wdlk/tree/master/packages/theme-query] under the hood which is a very small library I wrote to easily query theme properties.
+
+On the other hand, we want to make accessibility compliance checks more visual when you edit the style of your components. Based on the (WCAG)[https://www.w3.org/WAI/standards-guidelines/wcag/] and theme property control we can currently check the color contrast compliance of your components. See at ease if your changes are AA and AAA compliant.
 
 ### Future Features
-We still need to support most of the CSS properties to seamlessly work with Theme UIs `sx` prop.
 
-It is necessary to get closer to the tools being used by designers. I would like to access  Framer X / Figma  APIs to dynamically create Theme UI themes.
+The idea behind the Controlled Styled Editor is to move the barriers between design and development concerns by automating many of the overlapping processes. For this to become a reality we need to support data input from tools like Framer X and Figma to dynamically generate themes. 
+
+Accessibility color contrast check is only the beginning of making accessibility edits more visual. We would like to implement:
+Readability checks
+HTML semantic checks
+A built-in screen reader simulator using the Web Speech API
+
+We would like to abstract System UI themes as a GraphQL queries API instead of binding components with code, we could bind the GraphQL data directly into React components, offering an alternative form of decoupling. Combined with a MetaCSSQuery (`mcq`) custom prop for resolving into a style object.
 
 ### Refactoring / Changes
-Like I mentioned before this is a very early stage proof of concept. UI/UX
-refactoring is absolutely necessary. Especially the  `Mini Editor`  behavior of selected fields needs to be handled when selecting new components.
+The Controlled Styled Editor is a proof of concept. It's by no means production-ready.   A lot of refactoring and changes needs to done in the following areas:
+
+Improve the UX of Mini Editor select by properly handling style properties updates when selecting a new component
+Deploy the application and make it available to the public
+Include missing CSS properties from our `map-controlled-styles`
+Improve the underlying UI/UX
+Write tests for the custom Pragma and the Editor
 
 
-### Challenges
