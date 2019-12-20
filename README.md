@@ -36,9 +36,9 @@ Under the hood, it uses a custom JSX Pragma to handle element selection and Them
 
 At its very core, it uses the Theme UI / System UI specification for editing styles through a theme properties style editor. Your design adjustments will be compliant with your design system.
 
-It also uses (Theme Query)[https://github.com/woodlike/wdlk/tree/master/packages/theme-query] under the hood which is a very small library I wrote to easily query theme properties.
+It also uses [Theme Query](https://github.com/woodlike/wdlk/tree/master/packages/theme-query) under the hood which is a very small library I wrote to easily query theme properties.
 
-On the other hand, we want to make accessibility compliance checks more visual when you edit the style of your components. Based on the (WCAG)[https://www.w3.org/WAI/standards-guidelines/wcag/] and theme property control we can currently check the color contrast compliance of your components. See at ease if your changes are AA and AAA compliant.
+On the other hand, we want to make accessibility compliance checks more visual when you edit the style of your components. Based on the [WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/) and theme property control we can currently check the color contrast compliance of your components. See at ease if your changes are AA and AAA compliant.
 
 ### Future Features
 
