@@ -1,10 +1,10 @@
 import * as React from 'react';
-import * as ThemeQuery from 'theme-query';
-import theme from '../gatsby-plugin-theme-ui';
+// import * as ThemeQuery from 'theme-query';
+// import theme from '../gatsby-plugin-theme-ui';
+// import theme from 'gatsby-theme-query/src/theme';
 
 import { StyleContextProps } from '.';
 
-export const qt = ThemeQuery.create({ theme, styles: 'object' });
 export const StylesEditorContext = React.createContext({} as StyleContextProps);
 export const StylesEditorConsumer = StylesEditorContext.Consumer;
 StylesEditorContext.displayName = 'StyleEditorContext';

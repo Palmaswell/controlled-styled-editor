@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { SxStyleProp } from 'theme-ui';
 import { TextProps } from '.';
-import { qt } from '../../context';
+import { qt } from '../query';
 import { jsx } from '../../jsx';
 
 export const stylesText: SxStyleProp = {

@@ -2,7 +2,7 @@ import React from 'react';
 import { jsx as themeUI } from 'theme-ui';
 
 import { ControlledStyles } from '.';
-import { StylesEditorContext, StyleContextProps, qt } from '../context';
+import { StylesEditorContext, StyleContextProps } from '../context';
 
 export function jsx(
   type: React.ElementType,
@@ -43,11 +43,11 @@ export function jsx(
               styleMap.has(props.id) &&
               styleMap.get(props.id)),
             ...(props && props.id === currentId && {
-                outline: `2px solid ${qt('blues')(0)}`,
+                outline: `2px solid blue`,
               }),
             ...{
               ':hover': {
-                outline: `2px solid ${qt('blues')(0)}`,
+                outline: `2px solid blue`,
                 cursor: 'pointer',
               },
             },

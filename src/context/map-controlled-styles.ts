@@ -1,7 +1,7 @@
 import { SxStyleProp } from 'theme-ui';
 
 import { ThemeKey, ThemeProp, ThemeToken } from '../components/mini-editor';
-import { qt } from '.';
+import { qt } from '../components';
 
 export function mapControlledStyles(
   sx: SxStyleProp,

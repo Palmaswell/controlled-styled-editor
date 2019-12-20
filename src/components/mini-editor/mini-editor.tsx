@@ -7,11 +7,12 @@ import Select from 'react-select';
 
 import { stylesSelect } from './select-styles';
 //TODO: implement jest mock to use npm module and not local theme
-import theme from '../../gatsby-plugin-theme-ui';
+// import theme from '../../gatsby-plugin-theme-ui';
+import theme from 'gatsby-theme-query/src/theme';
+import { qt } from '../query';
 import {
   mapControlledStyles,
   useStylesContext,
-  qt,
   getRGBArray,
   contrastRatio,
   RGB,

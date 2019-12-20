@@ -6,7 +6,7 @@ module.exports = {
     lang: 'en-US'
   },
   plugins: [
-    'gatsby-plugin-theme-ui',
+    'gatsby-theme-query',
     'gatsby-plugin-typescript'
   ],
 };

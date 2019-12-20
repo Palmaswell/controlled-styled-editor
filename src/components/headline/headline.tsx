@@ -2,7 +2,7 @@
 import { SxStyleProp } from 'theme-ui';
 import { Heading } from '@theme-ui/components';
 import { HeadlineProps } from '.';
-import { qt } from '../../context';
+import { qt } from '../query';
 import { jsx } from '../../jsx';
 
 const stylesHeadline: SxStyleProp = {

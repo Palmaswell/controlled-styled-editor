@@ -5373,11 +5373,6 @@ gatsby-plugin-page-creator@^2.1.36:
     lodash "^4.17.15"
     micromatch "^3.1.10"
 
-gatsby-plugin-theme-ui@^0.2.43:
-  version "0.2.43"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-theme-ui/-/gatsby-plugin-theme-ui-0.2.43.tgz#a2baa2bdba1bd923edeb63f1ebdf48c36b5c63ef"
-  integrity sha512-rBQ5vlTSeuUuv929s5k6VUit7k/VXqZOFxd5FlMyR9DCo87zqEJhQ0sobkLrfhAiAo80TUyQEEA0GbLZtrb6pA==
-
 gatsby-plugin-typescript@^2.1.23:
   version "2.1.23"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-typescript/-/gatsby-plugin-typescript-2.1.23.tgz#02b29bf1986816d74a3f94231437b17b32bf1d12"
@@ -5421,6 +5416,13 @@ gatsby-telemetry@^1.1.44:
     stack-trace "^0.0.10"
     stack-utils "1.0.2"
     uuid "3.3.3"
+
+gatsby-theme-query@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/gatsby-theme-query/-/gatsby-theme-query-1.7.0.tgz#abadae36c809fd31429ed3f747bc88c5dfec9733"
+  integrity sha512-ez8POnIuZ0cVTzgrpwdpJGhdhL7zvPDhP/tzwiMUZBBDMnbrLpkmu+iBzTaVyyG4M6hj/H1miI1cppSSek0PTQ==
+  dependencies:
+    theme-query "1.5.0"
 
 gatsby@^2.18.11:
   version "2.18.11"
@@ -11290,6 +11292,14 @@ text-table@0.2.0, text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
+
+theme-query@1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/theme-query/-/theme-query-1.5.0.tgz#7d95508750fbeb2f69fb5b6c5d64d9c7bb9171f9"
+  integrity sha512-1dmYXpQIrTjW/NR5gSZGhPcMJv5dsjmF02FeAh9VvvnJZe83ssRhAX+H8trnr3KbTJT+eIE96s6IHrRBzPQpsw==
+  dependencies:
+    styled-system "^5.1.2"
+    theme-ui "^0.2.49"
 
 theme-query@1.5.1:
   version "1.5.1"
