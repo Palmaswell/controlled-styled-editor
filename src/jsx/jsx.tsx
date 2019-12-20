@@ -21,7 +21,6 @@ export function jsx(
         setEditorProps,
         setIsOpen,
       } = value;
-      const currentElement = props.id === currentId;
 
       const onClick = (e: React.MouseEvent<HTMLElement>): void => {
         e.stopPropagation();
@@ -37,18 +36,21 @@ export function jsx(
         {
           ...props,
           sx: {
-            ...props.sx,
-            ...(props.id && currentElement && editorProps),
-            ...(props.id && styleMap.has(props.id) && styleMap.get(props.id)),
-            ...(currentElement && {
-              outline: `2px solid ${qt('blues')(0)}`,
-            }),
+            ...(props && props.sx),
+            ...(props && props.id && props.id === currentId && editorProps),
+            ...(props &&
+              props.id &&
+              styleMap.has(props.id) &&
+              styleMap.get(props.id)),
+            ...(props && props.id === currentId && {
+                outline: `2px solid ${qt('blues')(0)}`,
+              }),
             ...{
               ':hover': {
                 outline: `2px solid ${qt('blues')(0)}`,
-                cursor: 'pointer'
+                cursor: 'pointer',
               },
-            }
+            },
           },
           onClick,
         },
