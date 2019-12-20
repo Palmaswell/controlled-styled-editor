@@ -1,7 +1,6 @@
 import * as React from 'react';
-// import * as ThemeQuery from 'theme-query';
-// import theme from '../gatsby-plugin-theme-ui';
-// import theme from 'gatsby-theme-query/src/theme';
+
+import theme from 'gatsby-theme-query/src/theme';
 
 import { StyleContextProps } from '.';
 
@@ -34,7 +33,8 @@ export const StyleEditorProvider: React.FC = (props): JSX.Element => {
     isOpen,
     setIsOpen,
     setSelectInputValue,
-    setStyleMap
+    setStyleMap,
+    theme
   };
 
   return (

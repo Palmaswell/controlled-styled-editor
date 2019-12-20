@@ -2,13 +2,10 @@
 import { Fragment } from 'react';
 import { jsx, SxStyleProp } from 'theme-ui';
 import { Box, Label, Heading } from '@theme-ui/components';
-import { stylesText } from '../text';
 import Select from 'react-select';
 
+import { stylesText } from '../text';
 import { stylesSelect } from './select-styles';
-//TODO: implement jest mock to use npm module and not local theme
-// import theme from '../../gatsby-plugin-theme-ui';
-import theme from 'gatsby-theme-query/src/theme';
 import { qt } from '../query';
 import {
   mapControlledStyles,
@@ -26,6 +23,7 @@ const stylesEditor: SxStyleProp = {
 const stylesHeading: SxStyleProp = {
   p: `${qt('spaces')(6)}px 0`,
   fontSize: `${qt('fontSizes')(2)}px`,
+  fontFamily: `${qt('heading')}`,
   color: `${qt('blacks')(1)}`,
 };
 
@@ -60,6 +58,7 @@ export const MiniEditor: React.FC = (): JSX.Element => {
     editorProps,
     setEditorProps,
     setStyleMap,
+    theme,
   } = useStylesContext();
   const controlledStyles = mapControlledStyles(editorProps, theme);
   const hasStyles = styleMap.has(currentId);

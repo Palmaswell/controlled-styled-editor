@@ -7,6 +7,7 @@ export interface StyleContextProps {
   readonly selectInputValue: string;
   readonly styleMap: Map<string, SxStyleProp>;
   readonly clearSelect: boolean;
+  readonly theme: {};
   setIsOpen(isOpen: boolean): void;
   setCurrentId(id: string): void;
   setEditorProps(styles: SxStyleProp): void;

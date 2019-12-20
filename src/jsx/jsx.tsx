@@ -38,16 +38,13 @@ export function jsx(
           sx: {
             ...(props && props.sx),
             ...(props && props.id && props.id === currentId && editorProps),
-            ...(props &&
-              props.id &&
-              styleMap.has(props.id) &&
-              styleMap.get(props.id)),
+            ...(props && props.id && styleMap.has(props.id) && styleMap.get(props.id)),
             ...(props && props.id === currentId && {
-                outline: `2px solid blue`,
+                outline: '2px solid rgb(99, 173, 242)',
               }),
             ...{
               ':hover': {
-                outline: `2px solid blue`,
+                outline: '2px solid rgb(99, 173, 242)',
                 cursor: 'pointer',
               },
             },

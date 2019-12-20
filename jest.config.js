@@ -3,12 +3,11 @@ const TEST_REGEX = '(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx?|ts?)$';
 module.exports = {
   transform: {
     '.(ts|tsx)': 'ts-jest',
-    '^.+\\.jsx?$': '<rootDir>/jest-preprocess.js',
+    "^.+\\.[jt]sx?$": "<rootDir>/jest-preprocess.js",
   },
   globals: {
     __PATH_PREFIX__: '',
   },
-  preset: 'ts-jest',
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
   moduleNameMapper: {
     '.+\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy',

@@ -6,7 +6,7 @@ import { jsx } from '../../jsx';
 
 export const stylesText: SxStyleProp = {
   padding: `${qt('spaces')(3)}px 0`,
-  fontFamily: 'body',
+  fontFamily: `${qt('body')}`,
   fontSize: `${qt('fontSizes')(1)}px`,
   lineHeight: 1.4,
   color: `${qt('grays')(0)}`,
