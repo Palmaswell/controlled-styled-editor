@@ -1,6 +1,5 @@
 import * as React from 'react';
-
-import theme from 'gatsby-theme-query/src/theme';
+import theme from '../gatsby-theme-query/theme';
 
 import { StyleContextProps } from '.';
 

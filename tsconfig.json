@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "rootDirs": ["./src"],
+    "rootDirs": [
+      "./src"
+    ],
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -10,7 +12,13 @@
     "forceConsistentCasingInFileNames": true,
     "jsx": "react",
     "importHelpers": true,
-    "lib": ["es5", "es6", "es7", "es2017", "dom"],
+    "lib": [
+      "es5",
+      "es6",
+      "es7",
+      "es2017",
+      "dom"
+    ],
     "module": "commonjs",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
@@ -29,5 +37,12 @@
     "target": "es6",
     "watch": false
   },
-  "exclude": ["./node_modules", "public", ".cache", "./src/**/*.test.tsx", "./src/gatsby-theme-query/**/*", "src/components/"]
+  "exclude": [
+    "./node_modules",
+    "public",
+    ".cache",
+    "./src/**/*.test.tsx",
+    "src/gatsby-theme-query/**/*",
+    "src/components/"
+  ]
 }

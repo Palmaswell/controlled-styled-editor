@@ -1,4 +1,3 @@
-import theme from 'gatsby-theme-query/src/theme';
 import { base } from '@theme-ui/presets';
 import { toTheme } from '@theme-ui/typography';
 import { toRGB } from 'theme-query';
@@ -21,7 +20,6 @@ const typography = toTheme({
 
 export default {
   ...base,
-  ...theme,
   ...typography,
   spaces: [0, 3, 6, 12, 18, 24, 30, 36, 48, 72],
   letterSpacings: [0.5, 1, 1.5],
