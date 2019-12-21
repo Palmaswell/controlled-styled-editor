@@ -6,3 +6,4 @@ export * from './layout';
 export * from './seo';
 export * from './root';
 export * from './text';
+export * from './query';

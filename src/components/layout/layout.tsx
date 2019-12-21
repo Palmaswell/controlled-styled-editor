@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, SxStyleProp } from 'theme-ui';
-import { qt } from '../../context';
+import { qt } from '../query';
 
 //Based on: https://react-layouts.com/sidebar
 const stylesMain: SxStyleProp = {

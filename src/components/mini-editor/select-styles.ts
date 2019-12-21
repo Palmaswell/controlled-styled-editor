@@ -1,5 +1,5 @@
 import { StylesConfig } from 'react-select';
-import { qt } from '../../context';
+import { qt } from '../query';
 
 export const stylesSelect: StylesConfig = {
   option: (provided, state) => ({

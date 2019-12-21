@@ -2,7 +2,7 @@ import * as ThemeQuery from 'theme-query';
 import { SxStyleProp } from 'theme-ui';
 
 import { mapControlledStyles, flatThemeTokens } from '../context';
-import theme from '../gatsby-plugin-theme-ui';
+import theme from '../gatsby-theme-query/theme';
 
 //TODO: mock theme query to use native plugin resolution
 describe('mapSXStyles()', () => {
