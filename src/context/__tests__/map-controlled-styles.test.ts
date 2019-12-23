@@ -1,8 +1,8 @@
 import * as ThemeQuery from 'theme-query';
 import { SxStyleProp } from 'theme-ui';
 
-import { mapControlledStyles, flatThemeTokens } from '../context';
-import theme from '../gatsby-theme-query/theme';
+import { mapControlledStyles, flatThemeTokens } from '..';
+import theme from '../../theme';
 
 //TODO: mock theme query to use native plugin resolution
 describe('mapSXStyles()', () => {
@@ -28,6 +28,7 @@ describe('mapSXStyles()', () => {
       'rgb(148, 148, 148)',
       'rgb(187, 187, 187)',
       'rgb(242, 242, 242)',
+      'inherit'
     ];
     fontFamiliesMock = [
       "'IBM Plex Serif', sans-serif",
@@ -138,7 +139,7 @@ describe('mapSXStyles()', () => {
 
   describe('reduceThemeTokens()', () => {
     it('should return a flatten array with theme tokens', () => {
-      expect(flatThemeTokens(qt('colors') as SxStyleProp)).toEqual(colorsMock);
+      expect(flatThemeTokens(qt('colors') as SxStyleProp)).toMatchSnapshot();
     });
   });
 });
