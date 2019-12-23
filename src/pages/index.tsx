@@ -14,7 +14,7 @@ import {
 
 const BuiltInContainer: React.FC<ContainerProps> = props => (
   <Container id={props.id} bg={props.bg} color={props.color}>
-    <Headline id={`${props.id}-headline`}>
+    <Headline tag="h2" id={`${props.id}-headline`}>
       The spectacle before us was indeed sublime.
     </Headline>
     <Text id={`${props.id}-text`}>
@@ -25,7 +25,7 @@ const BuiltInContainer: React.FC<ContainerProps> = props => (
 
 const BuiltInContainerII: React.FC<ContainerProps> = props => (
   <Container id={props.id} bg={props.bg} color={props.color}>
-    <Headline id={`${props.id}-headline`}>
+    <Headline tag="h1" id={`${props.id}-headline`}>
       My two natures had memory in common.
     </Headline>
     <Button id={`${props.id}-button`}>
@@ -40,9 +40,9 @@ const IndexPage: React.FC = (): JSX.Element => {
       <StyleEditorProvider>
         <Layout.Main>
           <Layout.Content>
-            <BuiltInContainerII id="built-in-2 "/>
+            <BuiltInContainerII id="built-in-2"/>
             <BuiltInContainer id="built-in-1" />
-            <Headline id="built-in-headline-1">
+            <Headline tag="h3" id="built-in-headline-1">
               A red flare silhouetted the jagged edge of a wing.
             </Headline>
             <Text id="built-in-text-1">

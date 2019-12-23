@@ -4,17 +4,11 @@ import { jsx, SxStyleProp } from 'theme-ui';
 import { Box, Label, Heading } from '@theme-ui/components';
 import Select from 'react-select';
 
-import { stylesText } from '../text';
+import * as A11y from '../../a11y';
+import { ValueSet } from '.';
 import { stylesSelect } from './select-styles';
-import { qt } from '../query';
-import {
-  mapControlledStyles,
-  useStylesContext,
-  getRGBArray,
-  contrastRatio,
-  RGB,
-  A11yRatio,
-} from '../../context';
+import { qt } from '..';
+import { mapControlledStyles, useStylesContext } from '../../context';
 
 const stylesEditor: SxStyleProp = {
   p: `${qt('spaces')(2)}px`,
@@ -32,14 +26,6 @@ const stylesLabel: SxStyleProp = {
   fontFamily: `${qt('body')}`,
   fontSize: `${qt('fontSizes')(0)}px`,
   color: `${qt('blacks')(1)}`,
-};
-
-const stylesSmall: SxStyleProp = {
-  display: 'inline-block',
-  fontFamily: `${qt('body')}`,
-  fontSize: `${qt('fontSizes')(0)}px`,
-  color: `${qt('grays')(0)}`,
-  marginBottom: `${qt('spaces')(3)}px`,
 };
 
 const themedStyles = (isOpen: boolean): SxStyleProp => {
@@ -60,6 +46,7 @@ export const MiniEditor: React.FC = (): JSX.Element => {
     setStyleMap,
     theme,
   } = useStylesContext();
+
   const controlledStyles = mapControlledStyles(editorProps, theme);
   const hasStyles = styleMap.has(currentId);
   const currentStyles = hasStyles && styleMap.get(currentId);
@@ -67,10 +54,13 @@ export const MiniEditor: React.FC = (): JSX.Element => {
     currentStyles &&
     currentStyles['color'] &&
     currentStyles['backgroundColor'] &&
-    contrastRatio(
-      getRGBArray(currentStyles['color']) as RGB,
-      getRGBArray(currentStyles['backgroundColor']) as RGB
+    A11y.contrastRatio(
+      A11y.getRGBArray(currentStyles['color']) as A11y.RGB,
+      A11y.getRGBArray(currentStyles['backgroundColor']) as A11y.RGB
     );
+  const a11yLevel = A11y.getComplianceLevel(a11yContrastRatio);
+  const contrastTitle = `Color contrast ratio ${a11yContrastRatio ?
+    a11yContrastRatio : ''} - ${a11yLevel}`;
 
   return (
     <Fragment>
@@ -129,21 +119,10 @@ export const MiniEditor: React.FC = (): JSX.Element => {
           <Heading sx={stylesHeading} as="h3">
             Accessibility
           </Heading>
-          <small sx={stylesSmall}>Pick a color and background color</small>
-          <p
-            sx={{
-              ...stylesText,
-              ...{
-                margin: 0,
-                padding: 0,
-              },
-            }}>
-            {a11yContrastRatio >= A11yRatio.aaa && 'AAA '}
-            {a11yContrastRatio < A11yRatio.aaa &&
-              a11yContrastRatio >= A11yRatio.aa &&
-              'AA '}
-            Color contrast ratio: {a11yContrastRatio}
-          </p>
+          <ValueSet
+            topline="Pick a color and background color"
+            title={contrastTitle}
+          />
         </Box>
       </div>
     </Fragment>

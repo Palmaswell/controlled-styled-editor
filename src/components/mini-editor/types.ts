@@ -18,3 +18,10 @@ export enum ThemeKey {
 }
 
 export type ThemeToken = string | number | SxStyleProp;
+
+export interface ValueSetProps {
+  readonly topline: string;
+  readonly title: string;
+  readonly id?: string;
+  onClick?: React.MouseEventHandler<HTMLElement>;
+}
