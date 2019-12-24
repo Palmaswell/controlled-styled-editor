@@ -28,6 +28,8 @@ export function findThemeProp(key: string, theme: SxStyleProp): ThemeProp | {} {
   switch (key) {
     case ThemeKey.padding:
       return { padding: flatThemeTokens(qt('spaces')('all')) };
+    case ThemeKey.margin:
+      return { margin: flatThemeTokens(qt('spaces')('all')) };
     case ThemeKey.backgroundColor:
       return { backgroundColor: flatThemeTokens(qt('colors')) };
     case ThemeKey.color:

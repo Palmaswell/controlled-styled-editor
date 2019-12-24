@@ -6,8 +6,8 @@ import { qt } from '../query';
 import { jsx } from '../../jsx';
 
 export const stylesText: SxStyleProp = {
-  padding: `${qt('spaces')(3)}px 0`,
-  margin: 0,
+  padding: 0,
+  margin: `${qt('spaces')(3)}px 0`,
   fontFamily: `${qt('body')}`,
   fontSize: `${qt('fontSizes')(1)}px`,
   lineHeight: 1.4,

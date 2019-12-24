@@ -6,7 +6,7 @@ import { qt } from '../query';
 import { jsx } from '../../jsx';
 
 const stylesHeadline: SxStyleProp = {
-  padding: `0 0 ${qt('spaces')(3)}px 0`,
+  margin: `0 0 ${qt('spaces')(3)}px 0`,
   fontFamily: `${qt('heading')}`,
   fontSize: `${qt('fontSizes')(6)}px`,
   color: 'inherit'

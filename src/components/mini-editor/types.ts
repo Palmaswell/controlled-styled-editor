@@ -15,6 +15,7 @@ export enum ThemeKey {
   fontSize = 'fontSize',
   fontFamily = 'fontFamily',
   padding = 'padding',
+  margin = 'margin'
 }
 
 export type ThemeToken = string | number | SxStyleProp;
@@ -24,4 +25,9 @@ export interface ValueSetProps {
   readonly title: string;
   readonly id?: string;
   onClick?: React.MouseEventHandler<HTMLElement>;
+}
+
+export interface SelectOptionProps {
+  value: string;
+  label: string;
 }

@@ -2,10 +2,10 @@
 import { Fragment } from 'react';
 import { jsx, SxStyleProp } from 'theme-ui';
 import { Box, Label, Heading } from '@theme-ui/components';
-import Select from 'react-select';
+import Select, { ValueType } from 'react-select';
 
 import * as A11y from '../../a11y';
-import { ValueSet } from '.';
+import { ValueSet, SelectOptionProps } from '.';
 import { stylesSelect } from './select-styles';
 import { qt } from '..';
 import { mapControlledStyles, useStylesContext } from '../../context';
@@ -59,8 +59,30 @@ export const MiniEditor: React.FC = (): JSX.Element => {
       A11y.getRGBArray(currentStyles['backgroundColor']) as A11y.RGB
     );
   const a11yLevel = A11y.getComplianceLevel(a11yContrastRatio);
-  const contrastTitle = `Color contrast ratio ${a11yContrastRatio ?
-    a11yContrastRatio : ''} - ${a11yLevel}`;
+  const contrastTitle = `Color contrast ratio ${
+    a11yContrastRatio ? a11yContrastRatio : ''
+  } - ${a11yLevel}`;
+
+  // tslint:disable-next-line:no-any
+  const handleChange = (e: ValueType<any>, key: string): void => {
+    const propValue = e && e.value;
+    if (propValue) {
+      setEditorProps({ ...editorProps, [key]: propValue });
+      if (hasStyles) {
+        const cssProp = styleMap.get(currentId);
+        setStyleMap(
+          new Map(
+            styleMap.set(currentId, {
+              ...cssProp,
+              [key]: propValue,
+            })
+          )
+        );
+      } else {
+        setStyleMap(new Map(styleMap.set(currentId, { [key]: propValue })));
+      }
+    }
+  };
 
   return (
     <Fragment>
@@ -77,37 +99,21 @@ export const MiniEditor: React.FC = (): JSX.Element => {
                 value: typeof v === 'number' ? `${v}px` : `${v}`,
                 label: v,
               }));
+              console.log(
+                editorProps[key],
+                '****',
+                editorProps.hasOwnProperty(key)
+              );
               return (
                 <Fragment key={`select-${i}`}>
                   <Label sx={stylesLabel}>{key}</Label>
                   <Select
                     placeholder={`Select a ${key}`}
+                    defaultValue={options[0]}
                     styles={stylesSelect}
                     options={options}
                     isSearchable={true}
-                    onChange={e => {
-                      const propValue = e && (e as { value: string }).value;
-                      if (propValue) {
-                        setEditorProps({ ...editorProps, [key]: propValue });
-                        if (hasStyles) {
-                          const cssProp = styleMap.get(currentId);
-                          setStyleMap(
-                            new Map(
-                              styleMap.set(currentId, {
-                                ...cssProp,
-                                [key]: propValue,
-                              })
-                            )
-                          );
-                        } else {
-                          setStyleMap(
-                            new Map(
-                              styleMap.set(currentId, { [key]: propValue })
-                            )
-                          );
-                        }
-                      }
-                    }}
+                    onChange={(e: ValueType<SelectOptionProps>) => handleChange(e, key)}
                   />
                 </Fragment>
               );
