@@ -15,10 +15,11 @@ export enum ThemeKey {
   fontSize = 'fontSize',
   fontFamily = 'fontFamily',
   padding = 'padding',
-  margin = 'margin'
+  margin = 'margin',
 }
 
 export type ThemeToken = string | number | SxStyleProp;
+export type SelectOptionProps = { [key: string]: string };
 
 export interface ValueSetProps {
   readonly topline: string;
@@ -27,7 +28,4 @@ export interface ValueSetProps {
   onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
-export interface SelectOptionProps {
-  value: string;
-  label: string;
-}
+

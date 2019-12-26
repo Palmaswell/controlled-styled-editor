@@ -4,7 +4,7 @@ import { qt } from '../query';
 export const stylesSelect: StylesConfig = {
   option: (provided, state) => ({
     ...provided,
-    padding: 20,
+    padding: '20px',
     borderBottom: `1px solid ${qt('grays')(3)}`,
     color: `${qt('blacks')(1)}`,
     background: state.isSelected ? `${qt('blues')(0)}` : `${qt('whites')(0)}`,

@@ -2,7 +2,7 @@
 import { Fragment } from 'react';
 import { jsx, SxStyleProp } from 'theme-ui';
 import { Box, Label, Heading } from '@theme-ui/components';
-import Select, { ValueType } from 'react-select';
+import Select from 'react-select';
 
 import * as A11y from '../../a11y';
 import { ValueSet, SelectOptionProps } from '.';
@@ -42,6 +42,8 @@ export const MiniEditor: React.FC = (): JSX.Element => {
     currentId,
     isOpen,
     editorProps,
+    setEditorSelectedProps,
+    editorSelectedProps,
     setEditorProps,
     setStyleMap,
     theme,
@@ -50,6 +52,7 @@ export const MiniEditor: React.FC = (): JSX.Element => {
   const controlledStyles = mapControlledStyles(editorProps, theme);
   const hasStyles = styleMap.has(currentId);
   const currentStyles = hasStyles && styleMap.get(currentId);
+
   const a11yContrastRatio =
     currentStyles &&
     currentStyles['color'] &&
@@ -63,24 +66,19 @@ export const MiniEditor: React.FC = (): JSX.Element => {
     a11yContrastRatio ? a11yContrastRatio : ''
   } - ${a11yLevel}`;
 
-  // tslint:disable-next-line:no-any
-  const handleChange = (e: ValueType<any>, key: string): void => {
+  const handleChange = (e: SelectOptionProps, key: string): void => {
     const propValue = e && e.value;
     if (propValue) {
       setEditorProps({ ...editorProps, [key]: propValue });
-      if (hasStyles) {
-        const cssProp = styleMap.get(currentId);
-        setStyleMap(
-          new Map(
-            styleMap.set(currentId, {
-              ...cssProp,
-              [key]: propValue,
-            })
-          )
-        );
-      } else {
-        setStyleMap(new Map(styleMap.set(currentId, { [key]: propValue })));
-      }
+      setEditorSelectedProps({
+        ...editorProps,
+        ...currentStyles,
+        [key]: propValue
+      });
+
+      hasStyles
+        ? setStyleMap(new Map(styleMap.set(currentId, {...styleMap.get(currentId), [key]: propValue})))
+        : setStyleMap(new Map(styleMap.set(currentId, { [key]: propValue })));
     }
   };
 
@@ -97,23 +95,23 @@ export const MiniEditor: React.FC = (): JSX.Element => {
             if (Array.isArray(value)) {
               const options = value.map(v => ({
                 value: typeof v === 'number' ? `${v}px` : `${v}`,
-                label: v,
+                label: typeof v === 'number' ? `${v}px` : `${v}`
               }));
-              console.log(
-                editorProps[key],
-                '****',
-                editorProps.hasOwnProperty(key)
-              );
+              const currentValue = {
+                value: editorSelectedProps[key],
+                label: editorSelectedProps[key],
+              };
+
               return (
                 <Fragment key={`select-${i}`}>
                   <Label sx={stylesLabel}>{key}</Label>
                   <Select
                     placeholder={`Select a ${key}`}
-                    defaultValue={options[0]}
+                    value={currentValue}
                     styles={stylesSelect}
                     options={options}
                     isSearchable={true}
-                    onChange={(e: ValueType<SelectOptionProps>) => handleChange(e, key)}
+                    onChange={e => handleChange(e as SelectOptionProps, key)}
                   />
                 </Fragment>
               );

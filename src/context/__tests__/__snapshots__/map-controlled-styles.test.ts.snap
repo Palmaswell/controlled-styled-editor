@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mapSXStyles() reduceThemeTokens() should return a flatten array with theme tokens 1`] = `
+exports[`Map Styles reduceThemeTokens() should return a flatten array with theme tokens 1`] = `
 Array [
   "rgb(92, 185, 136)",
   "rgb(255, 199, 84)",

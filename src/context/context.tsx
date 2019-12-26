@@ -15,25 +15,22 @@ export const useStylesContext = () => {
 export const StyleEditorProvider: React.FC = (props): JSX.Element => {
   const [currentId, setCurrentId] = React.useState('');
   const [isOpen, setIsOpen] = React.useState(false);
-  const [clearSelect, setClearSelect] = React.useState(false);
   const [editorProps, setEditorProps] = React.useState({});
-  const [selectInputValue, setSelectInputValue] = React.useState('');
+  const [editorSelectedProps, setEditorSelectedProps] = React.useState({});
   const [styleMap, setStyleMap] = React.useState(new Map());
 
   const provider: StyleContextProps = {
     styleMap,
-    selectInputValue,
-    clearSelect,
-    setClearSelect,
+    editorSelectedProps,
+    setEditorSelectedProps,
     editorProps,
     setEditorProps,
     currentId,
     setCurrentId,
     isOpen,
     setIsOpen,
-    setSelectInputValue,
     setStyleMap,
-    theme
+    theme,
   };
 
   return (
