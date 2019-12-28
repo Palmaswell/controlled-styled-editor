@@ -1,2 +1,2 @@
-export {contrastRatio, luminance, getRGBArray, getComplianceLevel} from './color-contrast';
+export {contrastRatio, luminance, getRGBArray, getContrastLevel} from './color-contrast';
 export * from './types';

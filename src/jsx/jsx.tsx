@@ -1,7 +1,8 @@
 import React from 'react';
 import { jsx as themeUI } from 'theme-ui';
 
-import { ControlledStyles } from '.';
+import { ControlledStyles } from '.'
+import { qt } from '../query';
 
 import {
   mapDefaultValues,
@@ -56,11 +57,11 @@ export function jsx(
             ...(props && props.id && props.id === currentId && editorProps),
             ...(props && props.id && styleMap.has(props.id) && styleMap.get(props.id)),
             ...(props && props.id === currentId && {
-                outline: '2px solid rgb(99, 173, 242)',
+                outline: `2px solid ${qt('blues')(0)}`,
               }),
               ...{
                 ':hover': {
-                  outline: '2px solid rgb(99, 173, 242)',
+                  outline: `2px solid ${qt('blues')(0)}`,
                   cursor: 'pointer',
               },
             },

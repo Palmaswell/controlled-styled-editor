@@ -1,6 +1,6 @@
 import { YValues, RGB, ContrastRatio, ComplianceLevel } from '.';
 
-export function getComplianceLevel(ratio: number): ComplianceLevel {
+export function getContrastLevel(ratio: number): ComplianceLevel {
   if (!ratio) {
     return '';
   };
@@ -10,7 +10,7 @@ export function getComplianceLevel(ratio: number): ComplianceLevel {
   if (ratio >= ContrastRatio.aa && ratio < ContrastRatio.aaa) {
     return 'AA';
   };
-  return 'not compliant';
+  return '';
 }
 
 export function getRGBArray(rgb: string) {

@@ -7,6 +7,12 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-theme-ui',
-    'gatsby-plugin-typescript'
+    'gatsby-plugin-typescript',
+    {
+      resolve: 'gatsby-plugin-typography',
+      options: {
+        pathToConfigModule: 'src/utils/typography',
+      },
+    },
   ],
 };

@@ -5,7 +5,7 @@ export interface Color {
 }
 
 export type RGB = [number, number, number];
-export type ComplianceLevel = 'AA' | 'AAA' | 'not compliant' | '';
+export type ComplianceLevel = 'A' | 'AA' | 'AAA' | '';
 
 export enum YValues {
   r = 0.2126,

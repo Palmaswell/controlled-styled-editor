@@ -3,7 +3,7 @@ import { SxStyleProp } from 'theme-ui';
 import { Container as ThemeContainer } from '@theme-ui/components';
 
 import { ContainerProps } from '.';
-import { qt } from '../query';
+import { qt } from '../../query';
 import { jsx } from '../../jsx';
 
 const stylesContainer: SxStyleProp = {

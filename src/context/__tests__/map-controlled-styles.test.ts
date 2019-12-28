@@ -29,7 +29,7 @@ describe('Map Styles', () => {
       'rgb(148, 148, 148)',
       'rgb(187, 187, 187)',
       'rgb(242, 242, 242)',
-      'inherit',
+      'currentColor',
     ];
     fontFamiliesMock = [
       "'IBM Plex Serif', sans-serif",

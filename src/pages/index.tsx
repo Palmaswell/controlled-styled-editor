@@ -34,7 +34,7 @@ const BuiltInContainerII: React.FC<ContainerProps> = props => (
   </Container>
 );
 
-const IndexPage: React.FC = (): JSX.Element => {
+export default function IndexPage(): JSX.Element {
   return (
     <Root>
       <StyleEditorProvider>
@@ -57,5 +57,3 @@ const IndexPage: React.FC = (): JSX.Element => {
     </Root>
   );
 };
-
-export default IndexPage;

@@ -2,14 +2,14 @@
 import { SxStyleProp } from 'theme-ui';
 import { Heading } from '@theme-ui/components';
 import { HeadlineProps, HeadlineTag } from '.';
-import { qt } from '../query';
+import { qt } from '../../query';
 import { jsx } from '../../jsx';
 
 const stylesHeadline: SxStyleProp = {
   margin: `0 0 ${qt('spaces')(3)}px 0`,
   fontFamily: `${qt('heading')}`,
   fontSize: `${qt('fontSizes')(6)}px`,
-  color: 'inherit'
+  color: 'currentColor'
 };
 
 const createFontSize = (tag: HeadlineTag): SxStyleProp => {

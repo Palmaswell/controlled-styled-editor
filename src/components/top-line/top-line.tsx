@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, SxStyleProp } from 'theme-ui';
 import { TopLineProps } from '.';
-import { qt } from '../query';
+import { qt } from '../../query';
 
 const stylesTopLine: SxStyleProp = {
   display: 'inline-block',

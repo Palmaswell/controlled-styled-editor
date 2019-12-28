@@ -6,11 +6,11 @@ const typography = toTheme({
   googleFonts: [
     {
       name: 'IBM Plex Sans',
-      styles: ['400', '600'],
+      styles: ['400', '500', '600'],
     },
     {
       name: 'IBM Plex Serif',
-      styles: ['400'],
+      styles: ['400', '500', '600'],
     },
   ],
   headerFontFamily: ['IBM Plex Sans', 'Helvetica'],
@@ -43,6 +43,6 @@ export default {
       toRGB([187, 187, 187]),
       toRGB([242, 242, 242]),
     ],
-    inherit: 'inherit'
+    currentColor: 'currentColor'
   },
 };
