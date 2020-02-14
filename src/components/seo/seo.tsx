@@ -70,7 +70,6 @@ export const SEO: React.FC = (): JSX.Element => {
       ].concat([])}
     >
       <title>{title}</title>
-      <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans|IBM+Plex+Serif&display=swap" rel="stylesheet"/>
     </Helmet>
   )
 };

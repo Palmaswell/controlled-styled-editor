@@ -1,4 +1,17 @@
-import { YValues, RGB } from './types';
+import { YValues, RGB, ContrastRatio, ComplianceLevel } from '.';
+
+export function getContrastLevel(ratio: number): ComplianceLevel {
+  if (!ratio) {
+    return '';
+  };
+  if (ratio >= ContrastRatio.aaa) {
+    return 'AAA';
+  };
+  if (ratio >= ContrastRatio.aa && ratio < ContrastRatio.aaa) {
+    return 'AA';
+  };
+  return '';
+}
 
 export function getRGBArray(rgb: string) {
   if (typeof rgb !== 'string') {

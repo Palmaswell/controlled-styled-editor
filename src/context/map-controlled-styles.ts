@@ -7,7 +7,7 @@ export function mapControlledStyles(
   sx: SxStyleProp,
   theme: SxStyleProp
 ): SxStyleProp | {} {
-  if (!sx || Array.isArray(sx) || typeof sx !== 'object' || sx === null) {
+  if (!sx) {
     return {};
   }
   const keys = Object.keys(sx);
@@ -22,12 +22,14 @@ export function mapControlledStyles(
 
 // TODO: extend CSS styles
 export function findThemeProp(key: string, theme: SxStyleProp): ThemeProp | {} {
-  if (!theme && typeof theme !== 'object') {
+  if (!theme) {
     return {};
   }
   switch (key) {
     case ThemeKey.padding:
       return { padding: flatThemeTokens(qt('spaces')('all')) };
+    case ThemeKey.margin:
+      return { margin: flatThemeTokens(qt('spaces')('all')) };
     case ThemeKey.backgroundColor:
       return { backgroundColor: flatThemeTokens(qt('colors')) };
     case ThemeKey.color:
@@ -55,4 +57,57 @@ export function flatThemeTokens(
     );
   }
   return [];
+}
+
+export function mapDefaultValues(sx: SxStyleProp): SxStyleProp {
+  const keys = Object.keys(sx);
+  if (!sx || keys.length === 0) {
+    return {};
+  }
+  return keys.reduce((acc: SxStyleProp, key) => {
+    const value = getDefaultValue(key, sx);
+    return {
+      ...acc,
+      ...(value ? { [key]: value } : {}),
+    };
+  }, {});
+}
+
+// TODO: extend CSS styles
+export function getDefaultValue(key: string, sx: SxStyleProp): string {
+  switch (key) {
+    case ThemeKey.padding:
+      return removeUnit(sx['padding']);
+    case ThemeKey.margin:
+      return removeUnit(sx['margin']);
+    case ThemeKey.backgroundColor:
+      return sx['backgroundColor'];
+    case ThemeKey.color:
+      return sx['color'];
+    case ThemeKey.fontFamily:
+      return sx['fontFamily'];
+    case ThemeKey.fontSize:
+      return removeUnit(sx['fontSize']);
+    default:
+      return '';
+  }
+}
+
+export function removeUnit(str: string): string {
+  if (!str) {
+    return '';
+  }
+
+  if (str.search(/\s/g)) {
+    return str
+      .split(' ')
+      .map((val: string) => {
+        const v = val.match(/[0-9]/g);
+        return v ? v.join('') : '';
+      })
+      .join(' ');
+  }
+
+  const value = str.match(/[0-9]/g);
+  return value ? value.join('') : str.trim();
 }

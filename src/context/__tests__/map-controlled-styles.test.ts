@@ -1,14 +1,15 @@
 import * as ThemeQuery from 'theme-query';
 import { SxStyleProp } from 'theme-ui';
 
-import { mapControlledStyles, flatThemeTokens } from '../context';
-import theme from '../gatsby-theme-query/theme';
+import { mapControlledStyles, flatThemeTokens, getDefaultValue, mapDefaultValues } from '..';
+import theme from '../../theme';
 
-//TODO: mock theme query to use native plugin resolution
-describe('mapSXStyles()', () => {
+describe('Map Styles', () => {
   const qt = ThemeQuery.create({ theme, styles: 'object' });
   let colorsMock: string[] | undefined;
-  let fontFamiliesMock: string[] | undefined;
+  let fontFamiliesMock: string[];
+  let cssRuleMock: SxStyleProp;
+
   beforeAll(() => {
     colorsMock = [
       'rgb(92, 185, 136)',
@@ -28,16 +29,26 @@ describe('mapSXStyles()', () => {
       'rgb(148, 148, 148)',
       'rgb(187, 187, 187)',
       'rgb(242, 242, 242)',
+      'currentColor',
     ];
     fontFamiliesMock = [
       "'IBM Plex Serif', sans-serif",
       "'IBM Plex Sans', 'Helvetica'",
     ];
+    cssRuleMock = {
+      padding: `${qt('spaces')(2)}px`,
+      margin: `${qt('spaces')(5)}px`,
+      color: qt('yellows')(1),
+      backgroundColor: qt('yellows')(0),
+      fontFamily: qt('heading'),
+      fontSize: `${qt('fontSizes')(6)}px`,
+    };
   });
 
   afterAll(() => {
     colorsMock = undefined;
-    fontFamiliesMock = undefined;
+    fontFamiliesMock = [''];
+    cssRuleMock = {};
   });
 
   it('should return null if the sx argument is not an object', () => {
@@ -118,27 +129,85 @@ describe('mapSXStyles()', () => {
   });
 
   it('should return a filtered theme object mapped to CSS properties', () => {
-    expect(
-      mapControlledStyles(
-        {
-          color: qt('yellows')(1),
-          backgroundColor: qt('yellows')(0),
-          padding: `${qt('spaces')(2)}px`,
-          fontFamily: 'heading',
-        },
-        theme
-      )
-    ).toStrictEqual({
+    expect(mapControlledStyles(cssRuleMock, theme)).toStrictEqual({
+      padding: theme.spaces,
+      margin: theme.spaces,
       color: colorsMock,
       backgroundColor: colorsMock,
-      padding: theme.spaces,
       fontFamily: fontFamiliesMock,
+      fontSize: theme.fontSizes,
     });
   });
 
   describe('reduceThemeTokens()', () => {
     it('should return a flatten array with theme tokens', () => {
-      expect(flatThemeTokens(qt('colors') as SxStyleProp)).toEqual(colorsMock);
+      expect(flatThemeTokens(qt('colors') as SxStyleProp)).toMatchSnapshot();
     });
   });
+
+  describe('getDefaultValue()', () => {
+    it('should return an empty string if no valid property is found', () => {
+      expect(getDefaultValue('pointerEvents', cssRuleMock)).toBe('');
+    });
+
+    it('should return a rgb color value', () => {
+      expect(getDefaultValue('color', cssRuleMock)).toBe(qt('yellows')(1));
+      expect(getDefaultValue('backgroundColor', cssRuleMock)).toBe(
+        qt('yellows')(0)
+      );
+    });
+
+    it('should return a sanitized space scale value', () => {
+      expect(getDefaultValue('padding', cssRuleMock)).toBe(
+        qt('spaces')(2).toString()
+      );
+      expect(getDefaultValue('margin', cssRuleMock)).toBe(
+        qt('spaces')(5).toString()
+      );
+      expect(
+        getDefaultValue('padding', {
+          padding: `${qt('spaces')(1)}px ${qt('spaces')(1)}px ${qt('spaces')(1)}px ${qt('spaces')(1)}px`,
+        })
+      ).toBe(
+        `${qt('spaces')(1)} ${qt('spaces')(1)} ${qt('spaces')(1)} ${qt('spaces')(1)}`
+      );
+      expect(
+        getDefaultValue('padding', {
+          padding: `${qt('spaces')(6)}px ${qt('spaces')(0)}px ${qt('spaces')(2)}px`,
+        })
+      ).toBe(`${qt('spaces')(6)} ${qt('spaces')(0)} ${qt('spaces')(2)}`);
+      expect(
+        getDefaultValue('margin', {
+          margin: `${qt('spaces')(3)}px ${qt('spaces')(5)}px`,
+        })
+      ).toBe(`${qt('spaces')(3)} ${qt('spaces')(5)}`);
+    });
+
+    it('should return a font family string', () => {
+      expect(getDefaultValue('fontFamily', cssRuleMock)).toBe(fontFamiliesMock[1]);
+    });
+
+    it('should return a sanitized font size scale value', () => {
+      expect(getDefaultValue('fontSize', cssRuleMock)).toBe(qt('fontSizes')(6).toString());
+    });
+  });
+
+  describe('mapDefaultValues()', () => {
+    it('should skip unknown properties', () => {
+      expect(mapDefaultValues({ pointerEvents: 'all' })).toStrictEqual({});
+      expect(mapDefaultValues({ backfaceVisibility: 'visible' })).toStrictEqual({});
+    });
+
+    it('should return a style object contining editor default values', () => {
+      expect(mapDefaultValues(cssRuleMock)).toStrictEqual({
+        padding: qt('spaces')(2).toString(),
+        margin: qt('spaces')(5).toString(),
+        color: qt('yellows')(1),
+        backgroundColor: qt('yellows')(0),
+        fontFamily: qt('heading'),
+        fontSize: qt('fontSizes')(6).toString(),
+      });
+    });
+  })
+
 });

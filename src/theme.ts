@@ -1,4 +1,3 @@
-import { base } from '@theme-ui/presets';
 import { toTheme } from '@theme-ui/typography';
 import { toRGB } from 'theme-query';
 
@@ -7,11 +6,11 @@ const typography = toTheme({
   googleFonts: [
     {
       name: 'IBM Plex Sans',
-      styles: ['400', '600'],
+      styles: ['400', '500', '600'],
     },
     {
       name: 'IBM Plex Serif',
-      styles: ['400'],
+      styles: ['400', '500', '600'],
     },
   ],
   headerFontFamily: ['IBM Plex Sans', 'Helvetica'],
@@ -19,7 +18,6 @@ const typography = toTheme({
 });
 
 export default {
-  ...base,
   ...typography,
   spaces: [0, 3, 6, 12, 18, 24, 30, 36, 48, 72],
   letterSpacings: [0.5, 1, 1.5],
@@ -45,5 +43,6 @@ export default {
       toRGB([187, 187, 187]),
       toRGB([242, 242, 242]),
     ],
+    currentColor: 'currentColor'
   },
 };

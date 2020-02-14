@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, SxStyleProp } from 'theme-ui';
-import { qt } from '../query';
+import { qt } from '../../query';
 
 //Based on: https://react-layouts.com/sidebar
 const stylesMain: SxStyleProp = {
@@ -12,6 +12,7 @@ const stylesContent: SxStyleProp = {
   flexGrow: 10,
   flexBasis: 0,
   minWidth: 320,
+  minHeight: '100vh',
   boxSizing: 'border-box',
   padding: `${qt('spaces')(4)}px ${qt('spaces')(2)}px`,
   backgroundColor: `${qt('whites')(1)}`,

@@ -3,15 +3,13 @@ import { SxStyleProp } from 'theme-ui';
 import { Container as ThemeContainer } from '@theme-ui/components';
 
 import { ContainerProps } from '.';
-import { qt } from '../query';
+import { qt } from '../../query';
 import { jsx } from '../../jsx';
 
 const stylesContainer: SxStyleProp = {
   width: 'calc(100% - 4px)',
   padding: `${qt('spaces')(6)}px`,
   margin: `${qt('spaces')(6)}px 0`,
-  fontFamily: 'body',
-  fontSize: `${qt('fontSizes')(6)}px`,
 };
 
 const createStylesContainer = (props: ContainerProps): SxStyleProp => {

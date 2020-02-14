@@ -1,8 +1,14 @@
 import React from 'react';
 import { jsx as themeUI } from 'theme-ui';
 
-import { ControlledStyles } from '.';
-import { StylesEditorContext, StyleContextProps } from '../context';
+import { ControlledStyles } from '.'
+import { qt } from '../query';
+
+import {
+  mapDefaultValues,
+  StylesEditorContext,
+  StyleContextProps,
+} from '../context';
 
 export function jsx(
   type: React.ElementType,
@@ -19,6 +25,7 @@ export function jsx(
         editorProps,
         setCurrentId,
         setEditorProps,
+        setEditorSelectedProps,
         setIsOpen,
       } = value;
 
@@ -27,7 +34,17 @@ export function jsx(
         if (props.id) {
           setCurrentId(props.id);
           setIsOpen(true);
-          props.sx ? setEditorProps(props.sx) : setEditorProps({});
+
+          if (props.sx) {
+            setEditorProps(props.sx);
+            setEditorSelectedProps({
+              ...mapDefaultValues(props.sx),
+              ...(styleMap.has(props.id) && styleMap.get(props.id))
+            });
+          } else {
+            setEditorProps({});
+            setEditorSelectedProps({});
+          }
         }
       };
 
@@ -40,12 +57,12 @@ export function jsx(
             ...(props && props.id && props.id === currentId && editorProps),
             ...(props && props.id && styleMap.has(props.id) && styleMap.get(props.id)),
             ...(props && props.id === currentId && {
-                outline: '2px solid rgb(99, 173, 242)',
+                outline: `2px solid ${qt('blues')(0)}`,
               }),
-            ...{
-              ':hover': {
-                outline: '2px solid rgb(99, 173, 242)',
-                cursor: 'pointer',
+              ...{
+                ':hover': {
+                  outline: `2px solid ${qt('blues')(0)}`,
+                  cursor: 'pointer',
               },
             },
           },

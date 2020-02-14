@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Map Styles reduceThemeTokens() should return a flatten array with theme tokens 1`] = `
+Array [
+  "rgb(92, 185, 136)",
+  "rgb(255, 199, 84)",
+  "rgb(255, 202, 84)",
+  "rgb(99, 173, 242)",
+  "rgb(215, 236, 255)",
+  "rgb(77, 118, 164)",
+  "rgb(255, 92, 93)",
+  "rgb(243, 156, 165)",
+  "rgb(0, 0, 0)",
+  "rgb(54, 54, 54)",
+  "rgb(255, 255, 255)",
+  "rgb(247, 247, 247)",
+  "rgb(244, 244, 244)",
+  "rgb(99, 99, 99)",
+  "rgb(148, 148, 148)",
+  "rgb(187, 187, 187)",
+  "rgb(242, 242, 242)",
+  "currentColor",
+]
+`;

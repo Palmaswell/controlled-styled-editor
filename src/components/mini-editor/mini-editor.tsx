@@ -1,20 +1,12 @@
 /** @jsx jsx */
 import { Fragment } from 'react';
 import { jsx, SxStyleProp } from 'theme-ui';
-import { Box, Label, Heading } from '@theme-ui/components';
-import Select from 'react-select';
+import { Heading } from '@theme-ui/components';
 
-import { stylesText } from '../text';
-import { stylesSelect } from './select-styles';
-import { qt } from '../query';
-import {
-  mapControlledStyles,
-  useStylesContext,
-  getRGBArray,
-  contrastRatio,
-  RGB,
-  A11yRatio,
-} from '../../context';
+import * as A11y from '../../a11y';
+import { EditorSelect, ValueSet, Box, SelectOptionProps } from '.';
+import { qt, Badge } from '..';
+import { mapControlledStyles, useStylesContext } from '../../context';
 
 const stylesEditor: SxStyleProp = {
   p: `${qt('spaces')(2)}px`,
@@ -27,28 +19,10 @@ const stylesHeading: SxStyleProp = {
   color: `${qt('blacks')(1)}`,
 };
 
-const stylesLabel: SxStyleProp = {
-  p: `${qt('spaces')(3)}px 0`,
-  fontFamily: `${qt('body')}`,
-  fontSize: `${qt('fontSizes')(0)}px`,
-  color: `${qt('blacks')(1)}`,
-};
-
-const stylesSmall: SxStyleProp = {
-  display: 'inline-block',
-  fontFamily: `${qt('body')}`,
-  fontSize: `${qt('fontSizes')(0)}px`,
-  color: `${qt('grays')(0)}`,
-  marginBottom: `${qt('spaces')(3)}px`,
-};
-
-const themedStyles = (isOpen: boolean): SxStyleProp => {
-  const visibilityStyles = isOpen ? { opacity: 1 } : { opacity: 0 };
-  return {
-    ...stylesEditor,
-    ...visibilityStyles,
-  };
-};
+const createStylesMiniEditor = (isOpen: boolean): SxStyleProp => ({
+  ...stylesEditor,
+  ...(isOpen ? { opacity: 1 } : { opacity: 0 }),
+});
 
 export const MiniEditor: React.FC = (): JSX.Element => {
   const {
@@ -56,21 +30,53 @@ export const MiniEditor: React.FC = (): JSX.Element => {
     currentId,
     isOpen,
     editorProps,
+    setEditorSelectedProps,
+    editorSelectedProps,
     setEditorProps,
     setStyleMap,
     theme,
   } = useStylesContext();
+
   const controlledStyles = mapControlledStyles(editorProps, theme);
   const hasStyles = styleMap.has(currentId);
   const currentStyles = hasStyles && styleMap.get(currentId);
-  const a11yContrastRatio =
-    currentStyles &&
-    currentStyles['color'] &&
-    currentStyles['backgroundColor'] &&
-    contrastRatio(
-      getRGBArray(currentStyles['color']) as RGB,
-      getRGBArray(currentStyles['backgroundColor']) as RGB
-    );
+
+  const handleChange = (e: SelectOptionProps, key: string): void => {
+    const propValue = e && e.value;
+    if (propValue) {
+      setEditorProps({ ...editorProps, [key]: propValue });
+      setEditorSelectedProps({
+        ...editorProps,
+        ...currentStyles,
+        [key]: propValue,
+      });
+
+      hasStyles
+        ? setStyleMap(
+            new Map(
+              styleMap.set(currentId, {
+                ...styleMap.get(currentId),
+                [key]: propValue,
+              })
+            )
+          )
+        : setStyleMap(new Map(styleMap.set(currentId, { [key]: propValue })));
+    }
+  };
+
+  const getContrastRatio = (props: SxStyleProp): number => (
+    props['backgroundColor'] &&
+      props['color'] &&
+      A11y.contrastRatio(
+        A11y.getRGBArray(props['color']) as A11y.RGB,
+        A11y.getRGBArray(props['backgroundColor']) as A11y.RGB
+      )
+  );
+
+  const createContrastTitle = (props: SxStyleProp): string => {
+    const ratio = getContrastRatio(props);
+    return `Color contrast ratio: ${ratio} - ${A11y.getContrastLevel(ratio)}`;
+  };
 
   return (
     <Fragment>
@@ -79,72 +85,43 @@ export const MiniEditor: React.FC = (): JSX.Element => {
           Theme Properties
         </Heading>
       </header>
-      <div sx={themedStyles(isOpen)}>
-        <Box margin={`0 0 ${qt('spaces')(8)}px 0`}>
-          {Object.entries(controlledStyles).map(([key, value], i) => {
+      <div sx={createStylesMiniEditor(isOpen)}>
+        <Box>
+          {Object.entries(controlledStyles).map(([key, value]) => {
             if (Array.isArray(value)) {
               const options = value.map(v => ({
                 value: typeof v === 'number' ? `${v}px` : `${v}`,
-                label: v,
+                label: typeof v === 'number' ? `${v}px` : `${v}`,
               }));
+              const currentValue = {
+                value: editorSelectedProps[key],
+                label: editorSelectedProps[key],
+              };
               return (
-                <Fragment key={`select-${i}`}>
-                  <Label sx={stylesLabel}>{key}</Label>
-                  <Select
-                    placeholder={`Select a ${key}`}
-                    styles={stylesSelect}
-                    options={options}
-                    isSearchable={true}
-                    onChange={e => {
-                      const propValue = e && (e as { value: string }).value;
-                      if (propValue) {
-                        setEditorProps({ ...editorProps, [key]: propValue });
-                        if (hasStyles) {
-                          const cssProp = styleMap.get(currentId);
-                          setStyleMap(
-                            new Map(
-                              styleMap.set(currentId, {
-                                ...cssProp,
-                                [key]: propValue,
-                              })
-                            )
-                          );
-                        } else {
-                          setStyleMap(
-                            new Map(
-                              styleMap.set(currentId, { [key]: propValue })
-                            )
-                          );
-                        }
-                      }
-                    }}
-                  />
-                </Fragment>
+                <EditorSelect
+                  key={`${currentId}-${key}`}
+                  label={key}
+                  currentValue={currentValue}
+                  options={options}
+                  onChange={e => handleChange(e as SelectOptionProps, key)}
+                />
               );
             }
             return null;
           })}
         </Box>
-        <Box margin={`0 0 ${qt('spaces')(3)}px 0`}>
-          <Heading sx={stylesHeading} as="h3">
-            Accessibility
-          </Heading>
-          <small sx={stylesSmall}>Pick a color and background color</small>
-          <p
-            sx={{
-              ...stylesText,
-              ...{
-                margin: 0,
-                padding: 0,
-              },
-            }}>
-            {a11yContrastRatio >= A11yRatio.aaa && 'AAA '}
-            {a11yContrastRatio < A11yRatio.aaa &&
-              a11yContrastRatio >= A11yRatio.aa &&
-              'AA '}
-            Color contrast ratio: {a11yContrastRatio}
-          </p>
-        </Box>
+        {editorSelectedProps['backgroundColor'] && editorSelectedProps['color'] && (
+          <Box>
+            <Heading sx={stylesHeading} as="h3">
+              Accessibility
+            </Heading>
+            <ValueSet
+              topline="Pick a color and background color"
+              title={createContrastTitle(editorSelectedProps)}
+            />
+          </Box>
+        )}
+        <Badge ratio={getContrastRatio(editorSelectedProps)} />
       </div>
     </Fragment>
   );

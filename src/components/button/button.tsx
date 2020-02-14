@@ -2,7 +2,7 @@
 import { SxStyleProp } from 'theme-ui';
 import { Button as ThemeButton } from '@theme-ui/components';
 import { ButtonProps } from '.';
-import { qt } from '../query';
+import { qt } from '../../query';
 import { jsx } from '../../jsx';
 
 const stylesButton: SxStyleProp = {
